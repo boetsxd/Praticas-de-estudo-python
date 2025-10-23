@@ -7,16 +7,31 @@ O loop só deve parar quando ele digitar "sair".
 
 lista_compra = ["pão", "presunto", "queijo"] 
 
-while True:    
-    opcao = input(" Digite 'adicionar' para inserir itens\n Digite 'remover' para remover itens\n Digite 'visualizar' para Listar itens\n Digite 'sair' para encerrar\n").lower().strip()
+while True:      # o .lower(para trazer todo texto par aminúsculo) .strip(p/ limpar espaços) vem para ajustar as entradas às posibilidades do usuário
+    menu = """
+    Digite 'adicionar' para inserir itens 
+    Digite 'remover' para remover itens 
+    Digite 'visualizar' para Listar itens 
+    Digite 'sair' para encerrar
+    """
+    opcao = input(menu).lower().strip()
     
     if(opcao == 'adicionar'):
         lista_compra.append(input("informe um item para adicionar à lista: \n"))
+    
     elif(opcao == 'visualizar'):
         print(f'{lista_compra}\n')
-    elif(opcao == 'remover'):
-        lista_compra.remove(input("Informe o item a ser removido: \n"))
+        
+    elif(opcao == 'remover'): #O método .remove() é sensível, caso o iem solicitado não esteja na lista pode gerar erro. Um if/else pode ajudar
+        item_remover = input("Informe o item a ser removido: \n")
+        
+        if item_remover in lista_compra:
+            lista_compra.remove(item_remover)
+        else:
+            print(f"Erro: '{item_remover}' não está na lista.")
+    
     elif(opcao == 'sair'):
         break
+   
     else:
         print("Opção inválida!")
